@@ -1,111 +1,175 @@
-# 09 Node.js Homework: Professional README Generator
+# Unit 10 OOP Homework: Template Engine - Employee Summary
 
-## Your Task
+One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this homework assignment, your challenge is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
 
-When creating an open source project on GitHub, it’s important to have a high-quality README for the app. This should include what the app is for, how to use the app, how to install it, how to report issues, and how to make contributions&mdash;this last part increases the likelihood that other developers will contribute to the success of the project. 
 
-You can quickly and easily create a README file by using a command-line application to generate one. This allows the project creator to devote more time to working on the project.
+## Instructions
 
-Your task is to create a command-line application that dynamically generates a professional README.md file from a user's input using the [Inquirer package](https://www.npmjs.com/package/inquirer). Review the [Good README Guide](../../01-HTML-Git-CSS/04-Important/Good-README-Guide/README.md) as a reminder of everything that a high-quality, professional README should contain. 
+You will build a software engineering team generator command line application. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. This assignment must also pass all unit tests. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user. Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
 
-The application will be invoked by using the following command:
-
-```bash
-node index.js
+```
+As a manager
+I want to generate a webpage that displays my team's basic info
+so that I have quick access to emails and GitHub profiles
 ```
 
-Because this application won’t be deployed, you’ll also need to provide a link to a walkthrough video that demonstrates its functionality. Revisit the Screencastify Tutorial in the prework as a refresher on how to record video from your computer. You’ll need to submit a link to the video _and_ add it to the README of your project.
+How do you deliver this? Here are some guidelines:
 
+* Use the [Inquirer npm package](https://github.com/SBoudrias/Inquirer.js/) to prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
 
-## User Story
+* Your app will run as a Node CLI to gather information about each employee.
 
-```md
-AS A developer
-I WANT a README generator
-SO THAT I can quickly create a professional README for a new project
+* Below is an example of what your application may look like. Remember, the styling is completely up to you so try to make it unique.
+
+![Employee Summary 1](./Assets/10-OOP-homework-demo-1.png)
+![Employee Summary 2](./Assets/10-OOP-homework-demo-2.png)
+
+In the `Develop` folder, there is a `package.json`, so make sure to `npm install`.
+
+The dependencies are, [jest](https://jestjs.io/) for running the provided tests, and [inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user.
+
+There are also unit tests to help you build the classes necessary.
+
+It is recommended that you follow this workflow:
+
+1. Run tests
+2. Create or update classes to pass a single test case
+3. Repeat
+
+🎗 Remember, you can run the tests at any time with `npm run test`
+
+It is recommended that you start with a directory structure that looks like this:
+
+```
+lib/           // classes and helper code
+output/        // rendered output
+templates/     // HTML template(s)
+test/          // jest tests
+  Employee.test.js
+  Engineer.test.js
+  Intern.test.js
+  Manager.test.js
+app.js         // Runs the application
 ```
 
-## Acceptance Criteria
+### Hints
 
-```md
-GIVEN a command-line application that accepts user input
-WHEN I am prompted for information about my application repository
-THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-WHEN I enter my project title
-THEN this is displayed as the title of the README
-WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
-THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
-WHEN I choose a license for my application from a list of options
-THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
-WHEN I enter my GitHub username
-THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-WHEN I enter my email address
-THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
-WHEN I click on the links in the Table of Contents
-THEN I am taken to the corresponding section of the README
-```
+* Create multiple HTML templates for each type of user. For example, you could use the following templates:
 
-## Getting Started
+  * `main.html`
 
-Here are some guidelines to help you get started:
+  * `engineer.html`
+  
+  * `intern.html`
+  
+  * `manager.html`
 
-* Create a `.gitignore` file and include `node_modules/` and `.DS_Store/` so that your `node_modules` directory isn't tracked or uploaded to GitHub. Be sure to create your `.gitignore` file before installing any npm dependencies.
+* You will want to make your methods as pure as possible. This means try to make your methods simple so that they are easier to test.
 
-* Make sure that your repo includes a `package.json` with the required dependencies. You can create one by running `npm init` when you first set up the project, before installing any dependencies.
+* The different employee types should all inherit some methods and properties from a base class of `Employee`.
 
-* Include a video of the typical user flow through your application. This includes views of the prompts and the responses after their selection.
+* In your HTML template files, you may want to add a placeholder character that helps your program identify where the dynamic markup begins and ends.
 
-* Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers or other developers in the future what you built and why, and to show how it works.
+## Minimum Requirements
 
-## Grading Requirements
+* Functional application.
 
-This homework is graded based on the following criteria: 
+* GitHub repository with a unique name and a README describing the project.
 
-### Deliverables: 20%
+* User can use the CLI to generate an HTML page that displays information about their team.
 
-* A sample README generated using the application must be submitted.
+* All tests must pass.
 
-* Your GitHub repository containing your application code.
+### Classes
+The project must have the these classes: `Employee`, `Manager`, `Engineer`,
+`Intern`. The tests for these classes in the `tests` directory must all pass.
 
-### Walkthrough Video: 27%
+The first class is an `Employee` parent class with the following properties and
+methods:
 
-* A walkthrough video that demonstrates the functionality of the README generator must be submitted, and a link to the video should be included in your README file.
+  * name
+  * id
+  * email
+  * getName()
+  * getId()
+  * getEmail()
+  * getRole() // Returns 'Employee'
 
-* The walkthrough video must demonstrate how a user would invoke the application from the command line.
+The other three classes will extend `Employee`. 
 
-* The walkthrough video must demonstrate how a user would enter responses to all of the prompts in the application.
+In addition to `Employee`'s properties and methods, `Manager` will also have:
 
-* The walkthrough video must demonstrate a generated README that matches the user input and has a functioning table of contents.
+  * officeNumber
 
-### Technical Acceptance Criteria: 40%
+  * getRole() // Overridden to return 'Manager'
 
-* Satisfies all of the above acceptance criteria plus the following:
+In addition to `Employee`'s properties and methods, `Engineer` will also have:
 
-	* Uses the [Inquirer package](https://www.npmjs.com/package/inquirer).
+  * github  // GitHub username
 
-### Repository Quality: 13%
+  * getGithub()
 
-* Repository has a unique name.
+  * getRole() // Overridden to return 'Engineer'
 
-* Repository follows best practices for file structure and naming conventions.
+In addition to `Employee`'s properties and methods, `Intern` will also have:
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+  * school 
 
-* Repository contains multiple descriptive commit messages.
+  * getSchool()
 
-* Repository contains a high-quality README with description and a link to walkthrough video.
+  * getRole() // Overridden to return 'Intern'
+
+### User input
+
+The project must prompt the user to build an engineering team. An engineering
+team consists of a manager, and any number of engineers and interns.
+
+### Roster output
+
+The project must generate a `team.html` page in the `output` directory, that displays a nicely formatted team roster. Each team member should display the following in no particular order:
+
+  * Name
+
+  * Role
+
+  * ID
+
+  * Role-specific property (School, link to GitHub profile, or office number)
+
+## Bonus
+
+* Use validation to ensure that the information provided is in the proper expected format.
+
+* Add the application to your portfolio.
+
+## Commit Early and Often
+
+One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:
+
+* Your commit history is a signal to employers that you are actively working on projects and learning new skills.
+
+* Your commit history allows you to revert your codebase in the event that you need to return to a previous state.
+
+Follow these guidelines for committing:
+
+* Make single-purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits.
+
+* Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history.
+
+* Don't commit half-done work, for the sake of your collaborators (and your future self!).
+
+* Test your application before you commit to ensure functionality at every step in the development process.
+
+We would like you to have well over 200 commits by graduation, so commit early and often!
 
 
-## Review
+## Submission on BCS
 
-You are required to submit the following for review:
+You are required to submit the following:
 
-* A walkthrough video demonstrating the functionality of the application.
+* The URL of the GitHub repository
 
-* A sample README.md file for a project repository generated using your application
+* A video demonstrating the entirety of the app's functionality 
 
-* The URL of the GitHub repository, with a unique name and a README describing the project
-
----
-
-© 2020 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+- - -
+© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
