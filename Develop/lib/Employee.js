@@ -22,4 +22,5 @@ class Employee {
         return "Employee";
     }
 }
+// exporting/ making Employee class available
 module.exports = Employee;
