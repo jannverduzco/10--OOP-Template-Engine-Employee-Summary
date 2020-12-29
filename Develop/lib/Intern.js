@@ -3,7 +3,8 @@ const Employee = require("./Employee");
 
 // Defining Intern class which extends employee class with its properties and methods
 class Intern extends Employee {
-    constructor(school) {
+    constructor(name, id, email, school) {
+        super(name, id, email);
         this.school = school;
     }
 
@@ -14,3 +15,4 @@ class Intern extends Employee {
         return "Intern";
     }
 }
+module.exports = Intern;
