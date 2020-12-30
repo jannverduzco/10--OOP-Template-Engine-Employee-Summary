@@ -39,12 +39,44 @@ function createEngineer() {
             message: "What is the Engineer's office number?",
         }
     ]).then(answers => {
-        const engineer = new engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerOfficeNum);
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerOfficeNum);
         // pushes engineer const (with all save infomation about engineer) to teamMembers array
         teamMembers.push(engineer);
         //calling what to do next function
         whatToDoNext();
-    });
+    })
+};
+
+// function that prompts user questions pertaining to intern employee being added
+function createIntern () {
+    inquirer.prompt([
+        {
+            type:"input",
+            name: "internName",
+            message: "What is the intern's name?",
+        },
+        {
+            type:"input",
+            name: "internId",
+            message: "What is the intern's ID?",
+        },
+        {
+            type:"input",
+            name: "internEmail",
+            message: "What is the intern's email?",
+        },
+        {
+            type:"input",
+            name: "internOfficeNum",
+            message: "What is the intern's office number?",
+        }
+    ]).then(answers => {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internOfficeNum);
+        // pushes intern const (with all save infomation about intern) to teamMembers array
+        teamMembers.push(intern);
+    //calling what to do next function
+        whatToDoNext();
+    })
 };
 
 // function that prompts user questions pertaining to manager employee being added
@@ -76,7 +108,7 @@ function createManager () {
         teamMembers.push(manager);
     //calling what to do next function
         whatToDoNext();
-    });
+    })
 };
 
 
