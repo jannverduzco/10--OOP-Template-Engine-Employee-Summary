@@ -19,23 +19,23 @@ const teamMembers = [];
 function createEngineer() {
     inquirer.prompt([
         {
-            type: "input",
-            name: "EngineerName",
+            type: 'input',
+            name: 'EngineerName',
             message: "What is the Engineer's name?",
         },
         {
-            type: "input",
-            name: "EngineerId",
+            type: 'input',
+            name: 'EngineerId',
             message: "What is the Engineer's ID?",
         },
         {
-            type: "input",
-            name: "EngineerEmail",
+            type: 'input',
+            name: 'EngineerEmail',
             message: "What is the Engineer's email?",
         },
         {
-            type: "input",
-            name: "EngineerOfficeNum",
+            type: 'input',
+            name: 'EngineerOfficeNum',
             message: "What is the Engineer's office number?",
         }
     ]).then(answers => {
@@ -43,7 +43,7 @@ function createEngineer() {
         // pushes engineer const (with all save infomation about engineer) to teamMembers array
         teamMembers.push(engineer);
         //calling what to do next function
-        whatToDoNext();
+        addNext();
     })
 };
 
@@ -51,23 +51,23 @@ function createEngineer() {
 function createIntern () {
     inquirer.prompt([
         {
-            type:"input",
-            name: "internName",
+            type:'input',
+            name: 'internName',
             message: "What is the intern's name?",
         },
         {
-            type:"input",
-            name: "internId",
+            type:'input',
+            name: 'internId',
             message: "What is the intern's ID?",
         },
         {
-            type:"input",
-            name: "internEmail",
+            type:'input',
+            name: 'internEmail',
             message: "What is the intern's email?",
         },
         {
-            type:"input",
-            name: "internOfficeNum",
+            type:'input',
+            name: 'internOfficeNum',
             message: "What is the intern's office number?",
         }
     ]).then(answers => {
@@ -75,7 +75,7 @@ function createIntern () {
         // pushes intern const (with all save infomation about intern) to teamMembers array
         teamMembers.push(intern);
     //calling what to do next function
-        whatToDoNext();
+        addNext();
     })
 };
 
@@ -83,23 +83,23 @@ function createIntern () {
 function createManager () {
     inquirer.prompt([
         {
-            type:"input",
-            name: "managerName",
+            type:'input',
+            name: 'managerName',
             message: "What is the manager's name?",
         },
         {
-            type:"input",
-            name: "managerId",
+            type:'input',
+            name: 'managerId',
             message: "What is the manager's ID?",
         },
         {
-            type:"input",
-            name: "managerEmail",
+            type:'input',
+            name: 'managerEmail',
             message: "What is the manager's email?",
         },
         {
-            type:"input",
-            name: "managerOfficeNum",
+            type:'input',
+            name: 'managerOfficeNum',
             message: "What is the manager's office number?",
         }
     ]).then(answers => {
@@ -107,10 +107,9 @@ function createManager () {
         // pushes manager const (with all save infomation about manager) to teamMembers array
         teamMembers.push(manager);
     //calling what to do next function
-        whatToDoNext();
+        addNext();
     })
 };
-
 
 // what to do next
 // what employye to add next (intern, engineer)
@@ -121,10 +120,25 @@ function createManager () {
 // answer, (do if or switch)
 // if answer is engineer  call engineer
 // if it is none call built team function
-
-
-
-
+function addNext () {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'addNext',
+            choices: ['Engineer', 'Intern', 'None'],
+            message: "Plese select which employee you would like to add next. (If you are done adding employee's, please select 'None')"
+        }
+    ]).then(answers => {
+        if (answers === "Engineer") {
+            createEngineer();
+        }
+        else if (answers === "Intern") {
+            createIntern();
+        }
+        else
+        buildTeam();
+    })
+};
 
 ////// After the user has input all employees desired, call the `render` function (required
 //////above) and pass in an array containing all employee objects; the `render` function will
@@ -145,9 +159,6 @@ function createManager () {
 //////for further information. Be sure to test out each class and verify it generates an
 //////object with the correct structure and methods. This structure will be crucial in order
 //////for the provided `render` function to work! ```
-
-
-
 
 createManager();
 // this will go in the funtion (once all employees are called)
