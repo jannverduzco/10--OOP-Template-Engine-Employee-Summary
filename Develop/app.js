@@ -140,6 +140,18 @@ function addNext () {
     })
 };
 
+// function writes to HTML templates accoringly
+function writeToFile(outputPath, teamMembers) {
+    return fs.writeFileSync(outputPath, render(teamMembers));
+}
+
+// function to render html and build team
+function buildTeam() {
+    inquirer.prompt()
+    .then((teamMembers) => writeToFile('team.html', generate))
+    
+}
+
 ////// After the user has input all employees desired, call the `render` function (required
 //////above) and pass in an array containing all employee objects; the `render` function will
 //////generate and return a block of HTML including templated divs for each employee!
