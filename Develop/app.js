@@ -129,10 +129,10 @@ function addNext () {
             message: "Plese select which employee you would like to add next. (If you are done adding employee's, please select 'None')"
         }
     ]).then(answers => {
-        if (answers === "Engineer") {
+        if (answers.addNext === "Engineer") {
             createEngineer();
         }
-        else if (answers === "Intern") {
+        else if (answers.addNext === "Intern") {
             createIntern();
         }
         else
