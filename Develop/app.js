@@ -21,22 +21,22 @@ function createEngineer() {
         {
             type: 'input',
             name: 'EngineerName',
-            message: "What is the Engineer's name?",
+            message: "Please provide the Engineer's name.",
         },
         {
             type: 'input',
             name: 'EngineerId',
-            message: "What is the Engineer's ID?",
+            message: "Please provide the Engineer's ID.",
         },
         {
             type: 'input',
             name: 'EngineerEmail',
-            message: "What is the Engineer's email?",
+            message: "Please provide the Engineer's email.?",
         },
         {
             type: 'input',
             name: 'EngineerOfficeNum',
-            message: "What is the Engineer's office number?",
+            message: "Please provide the Engineer's GitHub username.",
         }
     ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerOfficeNum);
@@ -48,65 +48,65 @@ function createEngineer() {
 };
 
 // function that prompts user questions pertaining to intern employee being added
-function createIntern () {
+function createIntern() {
     inquirer.prompt([
         {
-            type:'input',
+            type: 'input',
             name: 'internName',
-            message: "What is the intern's name?",
+            message: "Please provide the intern's name.",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'internId',
-            message: "What is the intern's ID?",
+            message: "Please provide the intern's ID.",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'internEmail',
-            message: "What is the intern's email?",
+            message: "Please provide the intern's email.",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'internOfficeNum',
-            message: "What is the intern's office number?",
+            message: "Please provide the intern's current school name.",
         }
     ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internOfficeNum);
         // pushes intern const (with all save infomation about intern) to teamMembers array
         teamMembers.push(intern);
-    //calling what to do next function
+        //calling what to do next function
         addNext();
     })
 };
 
 // function that prompts user questions pertaining to manager employee being added
-function createManager () {
+function createManager() {
     inquirer.prompt([
         {
-            type:'input',
+            type: 'input',
             name: 'managerName',
-            message: "What is the manager's name?",
+            message: "Please provide the manager's name.",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'managerId',
-            message: "What is the manager's ID?",
+            message: "Please provide the manager's ID.",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'managerEmail',
-            message: "What is the manager's email?",
+            message: "Please provide the manager's email.",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'managerOfficeNum',
-            message: "What is the manager's office number?",
+            message: "Please provide the manager's office number.",
         }
     ]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum);
         // pushes manager const (with all save infomation about manager) to teamMembers array
         teamMembers.push(manager);
-    //calling what to do next function
+        //calling what to do next function
         addNext();
     })
 };
@@ -120,7 +120,7 @@ function createManager () {
 // answer, (do if or switch)
 // if answer is engineer  call engineer
 // if it is none call built team function
-function addNext () {
+function addNext() {
     inquirer.prompt([
         {
             type: 'list',
@@ -136,21 +136,16 @@ function addNext () {
             createIntern();
         }
         else
-        buildTeam();
+            buildTeam();
     })
 };
 
-// function writes to HTML templates accoringly
-function writeToFile(outputPath, teamMembers) {
-    return fs.writeFileSync(outputPath, render(teamMembers));
-}
-
 // function to render html and build team
 function buildTeam() {
-    inquirer.prompt()
-    .then((teamMembers) => writeToFile('team.html', generate))
-    
+    fs.writeFileSync(outputPath, render(teamMembers), "utf8");
 }
+
+createManager();
 
 ////// After the user has input all employees desired, call the `render` function (required
 //////above) and pass in an array containing all employee objects; the `render` function will
@@ -172,6 +167,6 @@ function buildTeam() {
 //////object with the correct structure and methods. This structure will be crucial in order
 //////for the provided `render` function to work! ```
 
-createManager();
+
 // this will go in the funtion (once all employees are called)
 // fs.writeFile(outputPath, render(teamMembers));
